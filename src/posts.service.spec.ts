@@ -13,10 +13,22 @@ describe('PostsService', () => {
   });
 
   it('should add a new post', () => {
-    // реализуйте тест-кейс
+    const testPost = postsService.create(post);
+    expect(testPost).toMatchObject({
+      id: expect.any(String),
+      text: post.text,
+      date: expect.any(String),
+    });
+
+    const testDate = new Date(testPost.date);
+    expect(testDate).toBeInstanceOf(Date);
   });
 
   it('should find a post', () => {
-    // реализуйте тест-кейс
+    const testPost = postsService.create(post);
+    const foundPost = postsService.find(testPost.id);
+    expect(foundPost).toEqual(testPost);
+
+    expect(foundPost?.text).toEqual(post.text);
   });
 });
